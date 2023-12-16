@@ -18,4 +18,5 @@ body {
 	padding: 0;
 	box-sizing: border-box;
 	background-color: var(--primary-color);
+	-webkit-user-select: none;
 }

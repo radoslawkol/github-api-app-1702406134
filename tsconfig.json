@@ -23,7 +23,9 @@
 		"baseUrl": ".",
 		"paths": {
 			"@app/*": ["src/*"],
-			"@pages/*": ["src/pages/*"]
+			"@pages/*": ["src/pages/*"],
+			"@utils/*": ["src/utils/*"],
+			"@components/*": ["src/components/*"]
 		},
 		"esModuleInterop": true,
 		"types": ["node", "jest", "@testing-library/jest-dom"],
