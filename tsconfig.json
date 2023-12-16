@@ -22,10 +22,16 @@
 
 		"baseUrl": ".",
 		"paths": {
-			"@app/*": ["src/*"]
+			"@app/*": ["src/*"],
+			"@pages/*": ["src/pages/*"]
 		},
 		"esModuleInterop": true,
-		"types": ["node", "jest", "@testing-library/jest-dom"]
+		"types": ["node", "jest", "@testing-library/jest-dom"],
+		"plugins": [
+			{
+				"name": "@styled/typescript-styled-plugin"
+			}
+		]
 	},
 	"include": ["src", "vite-env.d.ts"],
 	"references": [{ "path": "./tsconfig.node.json" }]

@@ -7,6 +7,8 @@ export default {
 	},
 	rootDir: ".",
 	moduleNameMapper: {
+		"@app/(.*)": "<rootDir>/src/$1",
+		"@pages/(.*)": "<rootDir>/src/pages/$1",
 		"\\.(gif|ttf|eot|svg|png|jpg)$": "<rootDir>/test/__mocks__/fileMock.js",
 		"\\.(css|scss|sass)$": "identity-obj-proxy",
 	},
