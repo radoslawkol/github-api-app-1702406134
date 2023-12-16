@@ -12,4 +12,7 @@ export default {
 	},
 	testPathIgnorePatterns: ["/node_modules/"],
 	setupFilesAfterEnv: ["<rootDir>/jest.setup.ts"],
+	collectCoverage: true,
+	coverageDirectory: "<rootDir>/src/__tests__/testUtils/coverage",
+	modulePathIgnorePatterns: ["<rootDir>/src/__tests__/testUtils"],
 };
