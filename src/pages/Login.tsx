@@ -45,11 +45,15 @@ const Wrapper = styled.div`
 `;
 
 export default function Login() {
+	const handleLoginWithGitHub = () => {
+		window.open(`${process.env.VITE_BACKEND_URL}/auth/github`, "_self");
+	};
+
 	return (
 		<Wrapper>
 			<div>
 				<h1>Welcome to GitHub API app!</h1>
-				<button>Login with GitHub</button>
+				<button onClick={handleLoginWithGitHub}>Login with GitHub</button>
 			</div>
 		</Wrapper>
 	);
