@@ -1,6 +1,16 @@
 const passport = require("passport");
 const GitHubStrategy = require("passport-github2").Strategy;
 
+passport.serializeUser((user, done) => {
+	done(null, user);
+});
+
+passport.deserializeUser((user, done) => {
+	console.log("DESERIALIZE");
+	console.log(user);
+	done(null, user);
+});
+
 passport.use(
 	new GitHubStrategy(
 		{
@@ -13,11 +23,3 @@ passport.use(
 		}
 	)
 );
-
-passport.serializeUser((user, done) => {
-	done(null, user);
-});
-
-passport.deserializeUser((user, done) => {
-	done(null, user);
-});

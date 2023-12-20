@@ -1,12 +1,26 @@
 const express = require("express");
 require("dotenv").config();
-const cookieSession = require("cookie-session");
+const GitHubStrategy = require("passport-github2").Strategy;
+const session = require("express-session");
 const cors = require("cors");
+var bodyParser = require("body-parser");
 const passport = require("passport");
 const authRoute = require("./routes/auth");
 const passportConfig = require("./passwort");
 
 const app = express();
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(
+	session({
+		secret: process.env.SESSION_SECRET,
+		resave: false,
+		saveUninitialized: true,
+		// cookie: { secure: true }, on production
+	})
+);
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(
 	cors({
@@ -15,16 +29,6 @@ app.use(
 		credentials: true,
 	})
 );
-
-app.use(
-	cookieSession({
-		name: "session",
-		keys: ["token"],
-		maxAge: 24 * 60 * 60 * 100,
-	})
-);
-
-app.use(passport.initialize());
 
 app.use("/auth", authRoute);
 
