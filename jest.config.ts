@@ -9,8 +9,10 @@ export default {
 	moduleNameMapper: {
 		"@app/(.*)": "<rootDir>/src/$1",
 		"@pages/(.*)": "<rootDir>/src/pages/$1",
-		"@utils/(.*)": "<rootDir>/src/utils/$1",
 		"@components/(.*)": "<rootDir>/src/components/$1",
+		"@hooks/(.*)": "<rootDir>/src/hooks/$1",
+		"@helpers/(.*)": "<rootDir>/src/helpers/$1",
+		"@utils/(.*)": "<rootDir>/src/utils/$1",
 		"\\.(gif|ttf|eot|svg|png|jpg)$": "<rootDir>/test/__mocks__/fileMock.js",
 		"\\.(css|scss|sass)$": "identity-obj-proxy",
 	},

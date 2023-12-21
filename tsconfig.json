@@ -20,12 +20,14 @@
 		"noUnusedParameters": true,
 		"noFallthroughCasesInSwitch": true,
 
-		"baseUrl": ".",
+		"baseUrl": "./src",
 		"paths": {
-			"@app/*": ["src/*"],
-			"@pages/*": ["src/pages/*"],
-			"@utils/*": ["src/utils/*"],
-			"@components/*": ["src/components/*"]
+			"@app/*": ["./*"],
+			"@pages/*": ["./pages/*"],
+			"@components/*": ["./components/*"],
+			"@hooks/*": ["./hooks/*"],
+			"@helpers/*": ["./helpers/*"],
+			"@utils/*": ["./utils/*"]
 		},
 		"esModuleInterop": true,
 		"types": ["node", "jest", "@testing-library/jest-dom"],
