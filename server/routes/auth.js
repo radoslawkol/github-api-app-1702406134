@@ -10,7 +10,7 @@ router.get("/user", (req, res) => {
 	} else {
 		res.status(401).json({
 			status: "fail",
-			message: "You are not logged in.",
+			message: "You are not authenticated.",
 		});
 	}
 });

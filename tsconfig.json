@@ -27,7 +27,8 @@
 			"@components/*": ["./components/*"],
 			"@hooks/*": ["./hooks/*"],
 			"@helpers/*": ["./helpers/*"],
-			"@utils/*": ["./utils/*"]
+			"@utils/*": ["./utils/*"],
+			"@interfaces/*": ["./types/*"]
 		},
 		"esModuleInterop": true,
 		"types": ["node", "jest", "@testing-library/jest-dom"],
@@ -37,7 +38,7 @@
 			}
 		]
 	},
-	"include": ["src", "vite-env.d.ts"],
+	"include": ["src", "vite-env.d.ts", "src/types", "types"],
 	"exclude": ["server"],
 	"references": [{ "path": "./tsconfig.node.json" }]
 }

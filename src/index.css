@@ -13,10 +13,15 @@
 	--text-secondary: #ececec;
 }
 
-body {
+*,
+::before,
+::after {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
+}
+
+body {
 	background-color: var(--primary-color);
 	-webkit-user-select: none;
 }

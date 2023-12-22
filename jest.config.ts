@@ -13,6 +13,7 @@ export default {
 		"@hooks/(.*)": "<rootDir>/src/hooks/$1",
 		"@helpers/(.*)": "<rootDir>/src/helpers/$1",
 		"@utils/(.*)": "<rootDir>/src/utils/$1",
+		"@types/(.*)": "<rootDir>/types/$1",
 		"\\.(gif|ttf|eot|svg|png|jpg)$": "<rootDir>/test/__mocks__/fileMock.js",
 		"\\.(css|scss|sass)$": "identity-obj-proxy",
 	},
