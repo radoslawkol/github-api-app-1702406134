@@ -27,6 +27,7 @@ export default defineConfig({
 			{ find: "@helpers", replacement: resolve(__dirname, "./src/helpers") },
 			{ find: "@utils", replacement: resolve(__dirname, "./src/utils") },
 			{ find: "@interfaces", replacement: resolve(__dirname, "./src/types") },
+			{ find: "@assets", replacement: resolve(__dirname, "./src/assets") },
 		],
 	},
 });

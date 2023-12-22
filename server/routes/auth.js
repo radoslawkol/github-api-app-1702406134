@@ -24,7 +24,10 @@ router.get("/failed", (req, res) => {
 
 router.get("/logout", (req, res) => {
 	req.logout();
-	res.redirect(`${process.env.APP_URL}/login`);
+	res.json({
+		status: "success",
+		message: "Successfully log out.",
+	});
 });
 
 router.get("/github", passport.authenticate("github", { scope: ["profile"] }));

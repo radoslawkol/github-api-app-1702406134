@@ -1,7 +1,7 @@
 import { ICustomError } from "@interfaces/CustomError";
 
 export const getUser = async () => {
-	const res = await fetch("http://localhost:5000/auth/user", {
+	const res = await fetch(`${process.env.VITE_BACKEND_URL}/auth/user`, {
 		method: "GET",
 		credentials: "include",
 		headers: {

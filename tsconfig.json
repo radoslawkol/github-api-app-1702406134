@@ -28,7 +28,8 @@
 			"@hooks/*": ["./hooks/*"],
 			"@helpers/*": ["./helpers/*"],
 			"@utils/*": ["./utils/*"],
-			"@interfaces/*": ["./types/*"]
+			"@interfaces/*": ["./types/*"],
+			"@assets/*": ["./assets/*"]
 		},
 		"esModuleInterop": true,
 		"types": ["node", "jest", "@testing-library/jest-dom"],
