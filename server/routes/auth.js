@@ -36,7 +36,7 @@ router.get(
 	"/github/callback",
 	passport.authenticate("github", {
 		successRedirect: process.env.APP_URL,
-		failureRedirect: "/auth/failed",
+		failureRedirect: process.env.APP_URL + "/login",
 	})
 );
 

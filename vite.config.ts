@@ -10,7 +10,7 @@ export default defineConfig({
 		svgr({
 			include: "**/*.svg",
 		}),
-		EnvironmentPlugin("all"),
+		EnvironmentPlugin("all", { prefix: "VITE_" }),
 	],
 	server: {
 		port: 3000,
