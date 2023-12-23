@@ -1,35 +1,65 @@
-import { useState } from "react";
-import ReactLogo from "./assets/react.svg";
-import styles from "styled-components";
-
-const Button = styles.button`
-	color: yellow;
-	background-color: var(--primary-color);
-`;
+import {
+	createBrowserRouter,
+	Navigate,
+	RouterProvider,
+} from "react-router-dom";
+import Particles from "@tsparticles/react";
+import Login from "@pages/Login";
+import Dashboard from "@pages/Dashboard";
+import Error from "@pages/Error";
+import { useParticles } from "@hooks/useParticles";
+import { getUser } from "@helpers/getUser";
+import { useQuery } from "@tanstack/react-query";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useContext, useEffect } from "react";
+import { AuthContext } from "./context/AuthContext";
 
 function App() {
-	const [count, setCount] = useState(0);
+	const { init, particlesLoaded, options } = useParticles();
+	const { user, setUser } = useContext(AuthContext);
 
-	return (
-		<div className='main'>
-			<div>
-				<a href='https://react.dev' target='_blank'>
-					<ReactLogo height={60} width={60} fill='#b41818' />
-				</a>
-			</div>
-			<h1>Vite + React</h1>
-			<div className='card'>
-				<Button onClick={() => setCount((count) => count + 1)}>
-					count is {count}
-				</Button>
-				<p>
-					Edit <code>src/App.tsx</code> and save to test HMR
-				</p>
-			</div>
-			<p className='read-the-docs'>
-				Click on the Vite and React logos to learn more
-			</p>
-		</div>
-	);
+	const { data } = useQuery({
+		queryKey: ["authenticatedUser"],
+		queryFn: getUser,
+	});
+
+	useEffect(() => {
+		if (data?.user) {
+			setUser(data.user);
+		}
+	}, [data, setUser]);
+
+	const router = createBrowserRouter([
+		{
+			path: "/",
+			element: user ? <Dashboard /> : <Navigate to='/login' />,
+			errorElement: <Error />,
+		},
+		{
+			path: "/login",
+			element: user ? <Navigate to='/' /> : <Login />,
+		},
+	]);
+
+	if (init) {
+		return (
+			<>
+				<Particles
+					id='tsparticles'
+					particlesLoaded={particlesLoaded}
+					options={options}
+				/>
+				<ToastContainer />
+				<RouterProvider router={router} />
+			</>
+		);
+	} else
+		return (
+			<>
+				<RouterProvider router={router} />
+				<ToastContainer />
+			</>
+		);
 }
 export default App;
