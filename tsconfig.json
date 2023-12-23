@@ -3,7 +3,7 @@
 		"target": "ES2020",
 		"useDefineForClassFields": true,
 		"lib": ["ES2020", "DOM", "DOM.Iterable"],
-		"module": "ESNext",
+		"module": "ES2020",
 		"skipLibCheck": true,
 
 		/* Bundler mode */
@@ -20,13 +20,26 @@
 		"noUnusedParameters": true,
 		"noFallthroughCasesInSwitch": true,
 
-		"baseUrl": ".",
+		"baseUrl": "./src",
 		"paths": {
-			"@app/*": ["src/*"]
+			"@app/*": ["./*"],
+			"@pages/*": ["./pages/*"],
+			"@components/*": ["./components/*"],
+			"@hooks/*": ["./hooks/*"],
+			"@helpers/*": ["./helpers/*"],
+			"@utils/*": ["./utils/*"],
+			"@interfaces/*": ["./types/*"],
+			"@assets/*": ["./assets/*"]
 		},
 		"esModuleInterop": true,
-		"types": ["node", "jest", "@testing-library/jest-dom"]
+		"types": ["node", "jest", "@testing-library/jest-dom"],
+		"plugins": [
+			{
+				"name": "@styled/typescript-styled-plugin"
+			}
+		]
 	},
-	"include": ["src", "vite-env.d.ts"],
+	"include": ["src", "vite-env.d.ts", "src/types", "types"],
+	"exclude": ["server"],
 	"references": [{ "path": "./tsconfig.node.json" }]
 }
