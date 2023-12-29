@@ -23,5 +23,6 @@
 
 body {
 	background-color: var(--primary-color);
+	color: var(--text-primary);
 	-webkit-user-select: none;
 }
