@@ -2,9 +2,8 @@ import { AuthContext } from "@app/context/AuthContext";
 import { useContext } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
-import { getRecentRepository } from "@app/helpers/getRecentRepository";
 import Logout from "@app/components/Logout";
+import RecentRepoSection from "@app/components/RecentRepoSection";
 
 const Wrapper = styled.div`
 	position: absolute;
@@ -52,11 +51,6 @@ const Profile = styled.div`
 export default function Dashboard() {
 	const { user } = useContext(AuthContext);
 
-	const { data, isLoading } = useQuery({
-		queryKey: ["recentRepo"],
-		queryFn: getRecentRepository,
-	});
-
 	return (
 		<Wrapper>
 			<header>
@@ -69,16 +63,7 @@ export default function Dashboard() {
 				</Profile>
 			</header>
 			<main>
-				{!isLoading ? (
-					<section>
-						<h2>Recent Repository</h2>
-						<div>
-							<strong>{data?.repository?.name}</strong>
-						</div>
-					</section>
-				) : (
-					<div>Loading...</div>
-				)}
+				<RecentRepoSection />
 			</main>
 		</Wrapper>
 	);

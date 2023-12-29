@@ -20,7 +20,6 @@ router.get("/", async (req, res) => {
 			);
 
 			const recentRepo = sortedRepos[0];
-			console.log(recentRepo);
 
 			return res.status(200).json({
 				status: "success",
@@ -32,14 +31,14 @@ router.get("/", async (req, res) => {
 			});
 		}
 
-		res.status(200).json({
-			status: "success",
+		res.status(404).json({
+			status: "fail",
 			message: "No repositories found",
 		});
 	} catch (err) {
 		res.status(500).json({
 			status: "fail",
-			message: err.message,
+			message: "No repositories found",
 		});
 	}
 });
