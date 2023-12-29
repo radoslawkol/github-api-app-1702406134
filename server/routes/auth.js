@@ -5,7 +5,7 @@ router.get("/user", (req, res) => {
 	if (req.user) {
 		res.status(200).json({
 			status: "success",
-			user: req.user,
+			user: req.user.profile,
 		});
 	} else {
 		res.status(401).json({
@@ -35,9 +35,16 @@ router.get("/github", passport.authenticate("github", { scope: ["profile"] }));
 router.get(
 	"/github/callback",
 	passport.authenticate("github", {
-		successRedirect: process.env.APP_URL,
 		failureRedirect: process.env.APP_URL + "/login",
-	})
+	}),
+	(req, res) => {
+		req.session.user = {
+			...req.user.profile,
+			accessToken: req.user.accessToken,
+		};
+
+		res.redirect(process.env.APP_URL);
+	}
 );
 
 module.exports = router;
