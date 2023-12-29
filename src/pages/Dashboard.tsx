@@ -1,11 +1,9 @@
 import { AuthContext } from "@app/context/AuthContext";
 import { useContext } from "react";
 import styled from "styled-components";
-import LogoutIcon from "@assets/logoutIcon.svg";
-import { logout } from "@helpers/logout";
-import { Link, redirect } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
-import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
+import Logout from "@app/components/Logout";
+import RecentRepoSection from "@app/components/RecentRepoSection";
 
 const Wrapper = styled.div`
 	position: absolute;
@@ -27,6 +25,21 @@ const Wrapper = styled.div`
 			border-radius: 50%;
 		}
 	}
+
+	main {
+		margin: 0 20px;
+		padding: 20px;
+		background: rgba(255, 255, 255, 0.19);
+		border-radius: 16px;
+		box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+		backdrop-filter: blur(5px);
+		-webkit-backdrop-filter: blur(5px);
+		border: 1px solid rgba(255, 255, 255, 0.17);
+
+		h2 {
+			font-size: 20px;
+		}
+	}
 `;
 
 const Profile = styled.div`
@@ -35,29 +48,8 @@ const Profile = styled.div`
 	gap: 10px;
 `;
 
-const StyledLogoutIcon = styled(LogoutIcon)`
-	width: 28px;
-	height: 28px;
-	cursor: pointer;
-`;
-
 export default function Dashboard() {
 	const { user } = useContext(AuthContext);
-
-	const { data, isError, error, refetch } = useQuery({
-		queryKey: ["logout"],
-		queryFn: logout,
-		enabled: false,
-	});
-
-	if (isError) {
-		toast.error(error.message);
-	}
-
-	if (data?.status === "success") {
-		window.location.reload();
-		redirect("/login");
-	}
 
 	return (
 		<Wrapper>
@@ -67,9 +59,12 @@ export default function Dashboard() {
 					<Link to={user?.profileUrl || ""} target='_blank'>
 						<img src={user?.photos[0].value} />
 					</Link>
-					<StyledLogoutIcon onClick={() => refetch()} />
+					<Logout />
 				</Profile>
 			</header>
+			<main>
+				<RecentRepoSection />
+			</main>
 		</Wrapper>
 	);
 }

@@ -17,7 +17,7 @@ passport.use(
 			callbackURL: "/auth/github/callback",
 		},
 		function (accessToken, refreshToken, profile, done) {
-			return done(null, profile);
+			return done(null, { profile, accessToken });
 		}
 	)
 );
