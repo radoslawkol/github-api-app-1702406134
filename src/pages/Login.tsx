@@ -11,7 +11,7 @@ const Wrapper = styled.div`
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		gap: 16px;
+		gap: 36px;
 	}
 	h1 {
 		text-align: center;
