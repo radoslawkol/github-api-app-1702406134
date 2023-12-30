@@ -22,6 +22,7 @@ router.get("/", async (req, res) => {
 						.includes(req?.query?.searchTerm?.toLowerCase())
 				)
 				.map((repo) => ({
+					id: repo.id,
 					name: repo.name,
 					url: repo.html_url,
 					stars: repo.stargazers_count,
@@ -41,6 +42,7 @@ router.get("/", async (req, res) => {
 			return res.status(200).json({
 				status: "success",
 				repository: {
+					id: recentRepo.id,
 					name: recentRepo.name,
 					url: recentRepo.html_url,
 					stars: recentRepo.stargazers_count,
