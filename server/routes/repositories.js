@@ -14,7 +14,24 @@ router.get("/", async (req, res) => {
 			}
 		);
 
-		if (data?.items.length > 0) {
+		if (req?.query?.searchTerm) {
+			const matchRepos = data.items
+				.filter((repo) =>
+					repo.name
+						.toLowerCase()
+						.includes(req?.query?.searchTerm?.toLowerCase())
+				)
+				.map((repo) => ({
+					name: repo.name,
+					url: repo.html_url,
+					stars: repo.stargazers_count,
+				}));
+
+			return res.status(200).json({
+				status: "success",
+				repositories: matchRepos,
+			});
+		} else if (data?.items.length > 0) {
 			const sortedRepos = data.items.sort(
 				(a, b) => new Date(b.created_at) - new Date(a.created_at)
 			);
