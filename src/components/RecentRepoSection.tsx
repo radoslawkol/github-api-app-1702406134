@@ -9,8 +9,6 @@ const RepoContainer = styled.div`
 	justify-content: space-between;
 	align-items: center;
 	gap: 16px;
-	strong {
-	}
 
 	div {
 		display: flex;
