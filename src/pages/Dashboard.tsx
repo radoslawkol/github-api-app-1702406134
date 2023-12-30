@@ -4,6 +4,8 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import Logout from "@app/components/Logout";
 import RecentRepoSection from "@app/components/RecentRepoSection";
+import RepositoriesSearchBar from "@app/components/RepositoriesSearchBar";
+import { devices } from "@app/constants";
 
 const Wrapper = styled.div`
 	position: absolute;
@@ -28,13 +30,29 @@ const Wrapper = styled.div`
 
 	main {
 		margin: 0 20px;
-		padding: 20px;
-		background: rgba(255, 255, 255, 0.19);
-		border-radius: 16px;
-		box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-		backdrop-filter: blur(5px);
-		-webkit-backdrop-filter: blur(5px);
-		border: 1px solid rgba(255, 255, 255, 0.17);
+		display: flex;
+		flex-direction: column;
+		gap: 30px;
+
+		@media only screen and (${devices.md}) {
+			align-items: center;
+		}
+
+		section {
+			padding: 20px;
+			background: rgba(255, 255, 255, 0.19);
+			border-radius: 16px;
+			box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+			backdrop-filter: blur(5px);
+			-webkit-backdrop-filter: blur(5px);
+			border: 1px solid rgba(255, 255, 255, 0.17);
+			@media only screen and (${devices.md}) {
+				width: 600px;
+			}
+			@media only screen and (${devices.lg}) {
+				width: 800px;
+			}
+		}
 
 		h2 {
 			font-size: 20px;
@@ -63,7 +81,12 @@ export default function Dashboard() {
 				</Profile>
 			</header>
 			<main>
-				<RecentRepoSection />
+				<section>
+					<RecentRepoSection />
+				</section>
+				<section>
+					<RepositoriesSearchBar />
+				</section>
 			</main>
 		</Wrapper>
 	);

@@ -1,4 +1,4 @@
-import { getRecentRepository } from "@app/helpers/getRecentRepository";
+import { getRepositories } from "@app/helpers/getRepositories";
 import { useQuery } from "@tanstack/react-query";
 import { TailSpin } from "react-loader-spinner";
 import styled from "styled-components";
@@ -9,8 +9,6 @@ const RepoContainer = styled.div`
 	justify-content: space-between;
 	align-items: center;
 	gap: 16px;
-	strong {
-	}
 
 	div {
 		display: flex;
@@ -28,7 +26,7 @@ const SpinnerWrapper = styled.div`
 export default function RecentRepoSection() {
 	const { data, isLoading } = useQuery({
 		queryKey: ["recentRepo"],
-		queryFn: getRecentRepository,
+		queryFn: getRepositories,
 	});
 
 	if (isLoading) {
@@ -47,7 +45,7 @@ export default function RecentRepoSection() {
 	}
 
 	return (
-		<section>
+		<>
 			<h2>Recent Repository</h2>
 			<RepoContainer>
 				<strong>{data?.repository?.name || data.message}</strong>
@@ -58,6 +56,6 @@ export default function RecentRepoSection() {
 					</div>
 				)}
 			</RepoContainer>
-		</section>
+		</>
 	);
 }
