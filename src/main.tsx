@@ -4,7 +4,7 @@ import App from "./App.tsx";
 import "./index.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { AuthProvider } from "./context/AuthContext.tsx";
-import { BlocklistContextProvider } from "./context/BlockListContext.tsx";
+import { BlocklistContextProvider } from "./context/BlocklistContext.tsx";
 
 const queryClient = new QueryClient();
 

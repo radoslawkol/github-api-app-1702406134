@@ -41,7 +41,7 @@ export default function BlockReposList() {
 			{state?.blockedRepositories.length > 0 && (
 				<div style={{ marginTop: "20px" }}>
 					{state.blockedRepositories.map((repo) => (
-						<article>
+						<article key={repo.id}>
 							<span>{repo.name}</span>
 							<Button onClick={() => handleUnblock(repo)}>Unblock</Button>
 						</article>
