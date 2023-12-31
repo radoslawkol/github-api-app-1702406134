@@ -27,7 +27,7 @@ const blocklistReducer = (
 	action: BlocklistAction
 ): BlocklistState => {
 	switch (action.type) {
-		case "ADD_REPO": {
+		case "BLOCK_REPO": {
 			const repoExist = state.blockedRepositories.find(
 				(repo) => repo.id === action.payload?.id
 			);
@@ -39,7 +39,7 @@ const blocklistReducer = (
 				blockedRepositories: [...state.blockedRepositories, action.payload!],
 			};
 		}
-		case "DELETE_REPO":
+		case "UNBLOCK_REPO":
 			return {
 				...state,
 				blockedRepositories: state.blockedRepositories.filter(

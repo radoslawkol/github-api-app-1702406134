@@ -6,7 +6,7 @@ import styled from "styled-components";
 import SearchResultItem from "./SearchResultItem";
 import { IRepo } from "@app/types/Repo";
 import { TailSpin } from "react-loader-spinner";
-import { BlocklistContext } from "@app/context/BlockListContext";
+import { BlocklistContext } from "@app/context/BlocklistContext";
 
 const Container = styled.div`
 	@media only screen and (${devices.md}) {
@@ -92,7 +92,7 @@ export default function RepositoriesSearchBar() {
 			);
 			return newRepositories;
 		});
-		dispatch({ type: "ADD_REPO", payload: repo });
+		dispatch({ type: "BLOCK_REPO", payload: repo });
 	};
 
 	return (
