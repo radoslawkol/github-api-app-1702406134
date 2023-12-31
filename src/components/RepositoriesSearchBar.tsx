@@ -1,11 +1,12 @@
 import { devices } from "@app/constants";
 import { getRepositories } from "@app/helpers/getRepositories";
 import { useQuery } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import SearchResultItem from "./SearchResultItem";
 import { IRepo } from "@app/types/Repo";
 import { TailSpin } from "react-loader-spinner";
+import { BlocklistContext } from "@app/context/BlocklistContext";
 
 const Container = styled.div`
 	@media only screen and (${devices.md}) {
@@ -52,8 +53,10 @@ const SpinnerWrapper = styled.div`
 `;
 
 export default function RepositoriesSearchBar() {
+	const [repositories, setRepositories] = useState([]);
 	const [searchTerm, setSearchTerm] = useState("");
 	const [debouncedSearchTerm, setDebouncedSearchTerm] = useState("");
+	const { state, dispatch } = useContext(BlocklistContext);
 
 	const { data, isLoading } = useQuery({
 		queryKey: ["repositories", { search: debouncedSearchTerm }],
@@ -63,11 +66,34 @@ export default function RepositoriesSearchBar() {
 	});
 
 	useEffect(() => {
+		if (!data?.repositories || data?.repositories?.length === 0) return;
+		const excludedIds = new Set(
+			state.blockedRepositories.map((repo) => repo.id)
+		);
+
+		const searchResults = data.repositories.filter(
+			(repo: IRepo) => !excludedIds.has(repo.id)
+		);
+
+		setRepositories(searchResults);
+	}, [data, state.blockedRepositories]);
+
+	useEffect(() => {
 		const timeoutId = setTimeout(() => {
 			setDebouncedSearchTerm(searchTerm);
 		}, 500);
 		return () => clearTimeout(timeoutId);
 	}, [searchTerm]);
+
+	const handleBlockRepository = (repo: IRepo) => {
+		setRepositories((prev) => {
+			const newRepositories = [...prev].filter(
+				(stateRepo: IRepo) => stateRepo.id !== repo.id
+			);
+			return newRepositories;
+		});
+		dispatch({ type: "BLOCK_REPO", payload: repo });
+	};
 
 	return (
 		<Container>
@@ -92,10 +118,14 @@ export default function RepositoriesSearchBar() {
 							/>
 						</SpinnerWrapper>
 					)}
-					{data?.repositories?.length > 0 ? (
+					{repositories?.length > 0 ? (
 						<ul>
-							{data.repositories.map((repo: IRepo) => (
-								<SearchResultItem repo={repo} key={repo.name} />
+							{repositories.map((repo: IRepo) => (
+								<SearchResultItem
+									repo={repo}
+									onBlockRepository={() => handleBlockRepository(repo)}
+									key={repo.name}
+								/>
 							))}
 						</ul>
 					) : !isLoading ? (

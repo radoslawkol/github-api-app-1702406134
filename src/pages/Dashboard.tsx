@@ -6,6 +6,7 @@ import Logout from "@app/components/Logout";
 import RecentRepoSection from "@app/components/RecentRepoSection";
 import RepositoriesSearchBar from "@app/components/RepositoriesSearchBar";
 import { devices } from "@app/constants";
+import BlockReposList from "@app/components/BlockReposList";
 
 const Wrapper = styled.div`
 	position: absolute;
@@ -29,7 +30,7 @@ const Wrapper = styled.div`
 	}
 
 	main {
-		margin: 0 20px;
+		margin: 0 20px 40px;
 		display: flex;
 		flex-direction: column;
 		gap: 30px;
@@ -86,6 +87,9 @@ export default function Dashboard() {
 				</section>
 				<section>
 					<RepositoriesSearchBar />
+				</section>
+				<section>
+					<BlockReposList />
 				</section>
 			</main>
 		</Wrapper>
