@@ -1,5 +1,6 @@
 import { IRepo } from "@app/types/Repo";
 import styled from "styled-components";
+import Button from "./Button";
 
 const RepoContainer = styled.article`
 	width: 100%;
@@ -15,17 +16,30 @@ const RepoContainer = styled.article`
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		gap: 4px;
+		gap: 20px;
+
+		div {
+			gap: 4px;
+		}
 	}
 `;
 
-export default function SearchResultItem({ repo }: { repo: IRepo }) {
+export default function SearchResultItem({
+	repo,
+	onBlockRepository,
+}: {
+	repo: IRepo;
+	onBlockRepository: () => void;
+}) {
 	return (
 		<RepoContainer>
 			<strong>{repo?.name}</strong>
 			<div>
-				<b>{repo?.stars}</b>
-				<span>★</span>
+				<div>
+					<b>{repo?.stars}</b>
+					<span>★</span>
+				</div>
+				<Button onClick={onBlockRepository}>Block</Button>
 			</div>
 		</RepoContainer>
 	);
